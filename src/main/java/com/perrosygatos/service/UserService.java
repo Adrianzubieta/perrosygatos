@@ -1,9 +1,12 @@
 package com.perrosygatos.service;
 
-import com.perrosygatos.domain.Users;
+import com.perrosygatos.domain.User;
 
+import java.util.List;
 
 
 public interface UserService {
-    Users findById(Long id);
+    User findById(Long id);
+
+    List<User> findAll();
 }

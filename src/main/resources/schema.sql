@@ -2,13 +2,15 @@
 DROP TABLE IF EXISTS user;
 
 
-CREATE TABLE users (
+CREATE TABLE user (
     id BIGINT IDENTITY PRIMARY KEY,
-    name VARCHAR(50)
+    user_name VARCHAR(50),
+    last_name VARCHAR(50),
+    description VARCHAR(100)
 );
 
 
-INSERT INTO users VALUES (1, 'Adrian');
-INSERT INTO users VALUES (2, 'Ian');
-INSERT INTO users VALUES (1, 'Melissa');
-INSERT INTO users VALUES (2, 'Ariel');
+INSERT INTO user VALUES (1, 'Adrian','adrianZubieta','asdasdasdasdasdasdbvsd');
+INSERT INTO user VALUES (2, 'Ian','ianZubieta','asdasdasdasdsadasdagvsdbvsd');
+INSERT INTO user VALUES (3, 'Melissa','melissaPinaya','asdasdasdassadasdagvsdbvsd');
+INSERT INTO user VALUES (4, 'Ariel','arialZubieta','asdsdasdasdsadasdagvsdbvsd');
