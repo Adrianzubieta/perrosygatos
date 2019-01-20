@@ -13,7 +13,7 @@ public class User {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
   private String userName;
-  private String lastName;
-  private String description;
+  private String email;
+  private String password;
 
 }

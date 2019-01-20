@@ -23,6 +23,15 @@ public class UserServiceImpl implements UserService {
 
   @Override
   public Page<User> findAll(Pageable pageable) {
+    Assert.notNull(pageable, "El paginado no puede ser vacio");
     return userRepository.findAll(pageable);
+  }
+
+  @Override
+  public User save(User user) {
+    Assert.notNull(user,"El usuario no puede ser null");
+    Assert.notNull(user.getEmail(),"El email no puede ser null");
+    Assert.notNull(user.getPassword(),"El password no puede ser null");
+    return userRepository.save(user);
   }
 }
