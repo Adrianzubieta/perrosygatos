@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.test.jdbc.JdbcTestUtils;
 
 import java.util.NoSuchElementException;
 
@@ -45,7 +46,7 @@ public class UserServiceTest extends BaseTest {
 
   @Test
   public void findAll_withPageZeroSizeTwo_returnPageOfUsers() {
-    Pageable pageable = PageRequest.of(0,2);
+    Pageable pageable = PageRequest.of(0, 2);
 
     Page<User> users = userService.findAll(pageable);
 
@@ -61,7 +62,7 @@ public class UserServiceTest extends BaseTest {
 
   @Test(expected = IllegalArgumentException.class)
   public void findAll_withPageZeroSizeZero_throwIllegalArgumentException() {
-    Pageable pageable = PageRequest.of(0,0);
+    Pageable pageable = PageRequest.of(0, 0);
 
     userService.findAll(pageable);
   }
@@ -103,5 +104,71 @@ public class UserServiceTest extends BaseTest {
     user.setPassword("password-user");
 
     userService.save(user);
+  }
+
+  @Test
+  public void update_withUserWithIdExiting_returnUserUpdate() {
+    User user = new User();
+    user.setId(1L);
+    user.setUserName("UserName updated");
+
+    User userUpdated = userService.update(user);
+
+    assertThat(userUpdated).isNotNull();
+    assertThat(userUpdated.getId()).isEqualTo(1L);
+    assertThat(userUpdated.getUserName()).isEqualTo("UserName updated");
+  }
+
+  @Test(expected = NoSuchElementException.class)
+  public void update_withUserWithIdNonExisting_returnNoSuchElementException() {
+    User user = new User();
+    user.setId(99L);
+    user.setUserName("UserName updated");
+
+    userService.update(user);
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void update_withUserNull_returnIllegalArgumentException() {
+    userService.update(null);
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void update_withUserWithIdNull_returnIllegalArgumentException() {
+    User user = new User();
+    user.setUserName("UserName updated");
+
+    userService.update(user);
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void update_withUserWithUserNameVoid_returnIllegalArgumentException() {
+    User user = new User();
+    user.setId(1L);
+    user.setUserName("");
+
+    userService.update(user);
+  }
+
+  @Test
+  public void delete_withExistingId_deleteUser() {
+    Long id = 1L;
+
+    userService.delete(id);
+    entityManager.flush();
+
+    assertThat(JdbcTestUtils.countRowsInTableWhere(jdbcTemplate,"user","id = 1")).isEqualTo(0);
+  }
+
+  @Test(expected = NoSuchElementException.class)
+  public void delete_withNonExistingId_throwNoSuchElementException() {
+    Long id = 99L;
+
+    userService.delete(id);
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void delete_withNull_throwNoSuchElementException() {
+    userService.delete(null);
   }
 }
