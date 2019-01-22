@@ -46,6 +46,51 @@
                       "nullable": true
                     }
                   }
+                },
+                {
+                  "column": {
+                    "name": "state",
+                    "type": "varchar(200)",
+                    "constraints": {
+                      "nullable": true
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "address",
+                    "type": "varchar(200)",
+                    "constraints": {
+                      "nullable": true
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "phone",
+                    "type": "varchar(200)",
+                    "constraints": {
+                      "nullable": true
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "web_site",
+                    "type": "varchar(200)",
+                    "constraints": {
+                      "nullable": true
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "description",
+                    "type": "varchar(200)",
+                    "constraints": {
+                      "nullable": true
+                    }
+                  }
                 }
               ]
             }

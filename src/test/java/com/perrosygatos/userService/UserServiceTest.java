@@ -101,7 +101,7 @@ public class UserServiceTest extends BaseTest {
   public void save_withUserWithPasswordNull_throwIllegalArgumentException() {
     User user = new User();
     user.setUserName("user to save");
-    user.setPassword("password-user");
+    user.setEmail("email-user");
 
     userService.save(user);
   }
