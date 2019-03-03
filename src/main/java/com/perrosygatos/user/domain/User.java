@@ -16,10 +16,5 @@ public class User {
   private String email;
   private String password;
   private String userName;
-  private String state;
-  private String address;
-  private String phone;
-  private String webSite;
-  private String description;
 
 }

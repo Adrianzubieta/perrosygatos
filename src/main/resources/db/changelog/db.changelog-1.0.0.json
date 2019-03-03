@@ -25,7 +25,7 @@
                     "name": "user_name",
                     "type": "varchar(100)",
                     "constraints": {
-                      "nullable": true
+                      "nullable": false
                     }
                   }
                 },
@@ -34,61 +34,16 @@
                     "name": "email",
                     "type": "varchar(100)",
                     "constraints": {
-                      "nullable": true
+                      "nullable": false
                     }
                   }
                 },
                 {
                   "column": {
                     "name": "password",
-                    "type": "varchar(200)",
+                    "type": "varchar(100)",
                     "constraints": {
-                      "nullable": true
-                    }
-                  }
-                },
-                {
-                  "column": {
-                    "name": "state",
-                    "type": "varchar(200)",
-                    "constraints": {
-                      "nullable": true
-                    }
-                  }
-                },
-                {
-                  "column": {
-                    "name": "address",
-                    "type": "varchar(200)",
-                    "constraints": {
-                      "nullable": true
-                    }
-                  }
-                },
-                {
-                  "column": {
-                    "name": "phone",
-                    "type": "varchar(200)",
-                    "constraints": {
-                      "nullable": true
-                    }
-                  }
-                },
-                {
-                  "column": {
-                    "name": "web_site",
-                    "type": "varchar(200)",
-                    "constraints": {
-                      "nullable": true
-                    }
-                  }
-                },
-                {
-                  "column": {
-                    "name": "description",
-                    "type": "varchar(200)",
-                    "constraints": {
-                      "nullable": true
+                      "nullable": false
                     }
                   }
                 }
