@@ -1,6 +1,7 @@
 DELETE FROM user;
 DELETE FROM refuge;
 DELETE FROM kind;
+DELETE FROM animal;
 
 INSERT INTO user
 (id, user_name, email, password)
@@ -21,3 +22,9 @@ INSERT INTO kind
 VALUES
   (1, 'Perro'),
   (2, 'Gato')
+
+INSERT INTO animal
+(id, name, kind_id, age, description)
+VALUES
+  (1, 'firulais', 1, 2,'description_1'),
+  (2, 'tom', 2, 2,'description_2')
