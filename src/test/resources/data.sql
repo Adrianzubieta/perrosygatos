@@ -24,7 +24,7 @@ VALUES
   (2, 'Gato')
 
 INSERT INTO animal
-(id, name, kind_id, age, description)
+(id, name, kind_id, age, description, refuge_id, url_photo)
 VALUES
-  (1, 'firulais', 1, 2,'description_1'),
-  (2, 'tom', 2, 2,'description_2')
+  (1, 'firulais', 1, 2, 'description_1', 1, 'www.imageFirulais.com'),
+  (2, 'tom', 2, 2, 'description_2', 1, 'www.imageTom.com')

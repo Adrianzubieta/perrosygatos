@@ -110,12 +110,29 @@
                 },
                 {
                   "column": {
+                    "name": "url_photo",
+                    "type": "varchar(100)"
+                  }
+                },
+                {
+                  "column": {
                     "name": "kind_id",
                     "type": "bigint",
                     "constraints": {
                       "nullable": true,
                       "foreignKeyName": "fk_animal_kind",
                       "references": "kind(id)"
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "refuge_id",
+                    "type": "bigint",
+                    "constraints": {
+                      "nullable": true,
+                      "foreignKeyName": "fk_animal_refuge",
+                      "references": "refuge(id)"
                     }
                   }
                 }
