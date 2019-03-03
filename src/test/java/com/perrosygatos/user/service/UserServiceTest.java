@@ -1,8 +1,7 @@
-package com.perrosygatos.userService;
+package com.perrosygatos.user.service;
 
 import com.perrosygatos.BaseTest;
 import com.perrosygatos.user.domain.User;
-import com.perrosygatos.user.service.UserService;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

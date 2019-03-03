@@ -52,6 +52,29 @@
                 }
               ]
             }
+          },
+          {
+            "createTable": {
+              "tableName": "kind",
+              "columns": [
+                {
+                  "column": {
+                    "name": "id",
+                    "type": "bigint",
+                    "autoIncrement": true,
+                    "constraints": {
+                      "primaryKey": true
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "name",
+                    "type": "varchar(100)"
+                  }
+                }
+              ]
+            }
           }
         ]
       }

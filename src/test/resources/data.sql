@@ -1,5 +1,6 @@
 DELETE FROM user;
 DELETE FROM refuge;
+DELETE FROM kind;
 
 INSERT INTO user
 (id, user_name, email, password)
@@ -14,3 +15,9 @@ INSERT INTO refuge
 VALUES
   (1, 'refugio_1', 'webSite_1', 'description_1', '1516161616', 'address_1'),
   (2, 'refugio_2', 'webSite_2', 'description_2', '1516161616', 'address_2')
+
+INSERT INTO kind
+(id, name)
+VALUES
+  (1, 'Perro'),
+  (2, 'Gato')

@@ -1,8 +1,7 @@
-package com.perrosygatos.refugeService;
+package com.perrosygatos.refuge.service;
 
 import com.perrosygatos.BaseTest;
 import com.perrosygatos.refuge.domain.Refuge;
-import com.perrosygatos.refuge.service.RefugeService;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
