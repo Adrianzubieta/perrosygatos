@@ -45,4 +45,6 @@ public class KindServiceImpl implements KindService {
         modelMapper.map(kind, kindToUpdate);
         return kindToUpdate;
     }
+
+
 }

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.test.jdbc.JdbcTestUtils;
 
 import java.util.NoSuchElementException;
 
@@ -127,6 +128,28 @@ public class AnimalServiceTest extends BaseTest {
         Pageable pageable = PageRequest.of(0, 0);
 
         animalService.findAll(pageable);
+    }
+
+    @Test
+    public void delete_withExistingId_deleteAnimal() {
+        Long id = 1L;
+
+        animalService.delete(id);
+        entityManager.flush();
+
+        assertThat(JdbcTestUtils.countRowsInTableWhere(jdbcTemplate, "animal", "id = 1")).isEqualTo(0);
+    }
+
+    @Test(expected = NoSuchElementException.class)
+    public void delete_withNonExistingId_throwNoSuchElementException() {
+        Long id = 99L;
+
+        animalService.delete(id);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void delete_withNull_throwNoSuchElementException() {
+        animalService.delete(null);
     }
 
 }

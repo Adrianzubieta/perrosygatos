@@ -13,4 +13,7 @@ public interface AnimalService {
     Animal update(Animal animal);
 
     Page<Animal> findAll(Pageable pageable);
+
+    void delete(Long id);
+
 }

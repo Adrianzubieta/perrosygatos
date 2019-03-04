@@ -6,10 +6,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/refuge")
@@ -29,4 +27,20 @@ public class RefugeRestController {
         return refugeService.findAll(pageable);
     }
 
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public Refuge save(@RequestBody Refuge refuge) {
+        return refugeService.save(refuge);
+    }
+
+    @PatchMapping
+    public Refuge update(@RequestBody Refuge refuge) {
+        return refugeService.update(refuge);
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable Long id) {
+        refugeService.delete(id);
+    }
 }

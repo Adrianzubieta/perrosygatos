@@ -43,4 +43,10 @@ public class AnimalRestController {
         return animalService.findAll(pageable);
     }
 
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable Long id) {
+        animalService.delete(id);
+    }
+
 }

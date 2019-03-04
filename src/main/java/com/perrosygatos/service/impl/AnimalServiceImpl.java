@@ -5,11 +5,14 @@ import com.perrosygatos.repository.AnimalRepository;
 import com.perrosygatos.service.AnimalService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
+
+import java.util.NoSuchElementException;
 
 @Service
 @RequiredArgsConstructor
@@ -44,5 +47,15 @@ public class AnimalServiceImpl implements AnimalService {
     public Page<Animal> findAll(Pageable pageable) {
         Assert.notNull(pageable, "The pageable is null");
         return animalRepository.findAll(pageable);
+    }
+
+    @Override
+    public void delete(Long id) {
+        Assert.notNull(id, "El id no puede ser vacio");
+        try {
+            animalRepository.deleteById(id);
+        } catch (EmptyResultDataAccessException ex) {
+            throw new NoSuchElementException();
+        }
     }
 }

@@ -119,4 +119,5 @@ public class KindServiceTest extends BaseTest {
         kindService.update(kindToUpdate);
     }
 
+
 }

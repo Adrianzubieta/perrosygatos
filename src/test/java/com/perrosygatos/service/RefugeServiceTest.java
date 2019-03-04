@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.test.jdbc.JdbcTestUtils;
 
 import java.util.NoSuchElementException;
 
@@ -134,6 +135,28 @@ public class RefugeServiceTest extends BaseTest {
         Pageable pageable = PageRequest.of(0, 0);
 
         refugeService.findAll(pageable);
+    }
+
+    @Test
+    public void delete_withExistingId_deleteRefuge() {
+        Long id = 1L;
+
+        refugeService.delete(id);
+        entityManager.flush();
+
+        assertThat(JdbcTestUtils.countRowsInTableWhere(jdbcTemplate, "refuge", "id = 1")).isEqualTo(0);
+    }
+
+    @Test(expected = NoSuchElementException.class)
+    public void delete_withNonExistingId_throwNoSuchElementException() {
+        Long id = 99L;
+
+        refugeService.delete(id);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void delete_withNull_throwNoSuchElementException() {
+        refugeService.delete(null);
     }
 
 }

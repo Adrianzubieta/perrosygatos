@@ -14,4 +14,6 @@ public interface RefugeService {
 
     Page<Refuge> findAll(Pageable pageable);
 
+    void delete(Long id);
+
 }
