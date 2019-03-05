@@ -20,5 +20,7 @@ public class Refuge {
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "refuge_id")
     List<Animal> animals;
+    @ManyToOne
+    private City city;
 
 }

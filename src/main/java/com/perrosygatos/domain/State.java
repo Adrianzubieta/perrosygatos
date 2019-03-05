@@ -4,18 +4,15 @@ import lombok.Data;
 
 import javax.persistence.*;
 
-@Data
 @Entity
-public class Animal {
+@Data
+public class State {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private String description;
-    private Integer age;
-    private String urlPhoto;
-    private String history;
     @ManyToOne
-    private Kind kind;
+    private Country country;
+
 }

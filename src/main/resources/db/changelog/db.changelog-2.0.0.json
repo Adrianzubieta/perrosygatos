@@ -8,6 +8,104 @@
         "changes": [
           {
             "createTable": {
+              "tableName": "country",
+              "columns": [
+                {
+                  "column": {
+                    "name": "id",
+                    "type": "bigint",
+                    "autoIncrement": true,
+                    "constraints": {
+                      "primaryKey": true
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "name",
+                    "type": "varchar(100)",
+                    "constraints": {
+                      "nullable": false
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "createTable": {
+              "tableName": "state",
+              "columns": [
+                {
+                  "column": {
+                    "name": "id",
+                    "type": "bigint",
+                    "autoIncrement": true,
+                    "constraints": {
+                      "primaryKey": true
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "name",
+                    "type": "varchar(100)",
+                    "constraints": {
+                      "nullable": false
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "country_id",
+                    "type": "bigint",
+                    "constraints": {
+                      "foreignKeyName": "fk_state_country",
+                      "references": "country(id)"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "createTable": {
+              "tableName": "city",
+              "columns": [
+                {
+                  "column": {
+                    "name": "id",
+                    "type": "bigint",
+                    "autoIncrement": true,
+                    "constraints": {
+                      "primaryKey": true
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "name",
+                    "type": "varchar(100)",
+                    "constraints": {
+                      "nullable": false
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "state_id",
+                    "type": "bigint",
+                    "constraints": {
+                      "foreignKeyName": "fk_city_state",
+                      "references": "state(id)"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "createTable": {
               "tableName": "refuge",
               "columns": [
                 {
@@ -48,6 +146,16 @@
                   "column": {
                     "name": "address",
                     "type": "varchar(100)"
+                  }
+                },
+                {
+                  "column": {
+                    "name": "city_id",
+                    "type": "bigint",
+                    "constraints": {
+                      "foreignKeyName": "fk_refuge_city",
+                      "references": "city(id)"
+                    }
                   }
                 }
               ]
@@ -112,6 +220,12 @@
                   "column": {
                     "name": "url_photo",
                     "type": "varchar(100)"
+                  }
+                },
+                {
+                  "column": {
+                    "name": "history",
+                    "type": "varchar(200)"
                   }
                 },
                 {
