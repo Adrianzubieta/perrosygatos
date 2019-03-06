@@ -19,16 +19,16 @@ import java.io.FileReader;
 @Transactional
 public abstract class BaseTest {
 
-  @Autowired
-  protected JdbcTemplate jdbcTemplate;
+    @Autowired
+    protected JdbcTemplate jdbcTemplate;
 
-  @Autowired
-  protected EntityManager entityManager;
+    @Autowired
+    protected EntityManager entityManager;
 
-  @SneakyThrows
-  protected String getContentFromFile(String filePath) {
-    File file = new ClassPathResource(filePath).getFile();
-    return FileCopyUtils.copyToString(new FileReader(file));
-  }
+    @SneakyThrows
+    protected String getContentFromFile(String filePath) {
+        File file = new ClassPathResource(filePath).getFile();
+        return FileCopyUtils.copyToString(new FileReader(file));
+    }
 
 }

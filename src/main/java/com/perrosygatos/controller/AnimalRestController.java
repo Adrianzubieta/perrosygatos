@@ -39,7 +39,7 @@ public class AnimalRestController {
     }
 
     @GetMapping
-    public Page<Animal> findAll(Pageable pageable) {
+    public Page<Animal> findAll(@RequestBody Pageable pageable) {
         return animalService.findAll(pageable);
     }
 
@@ -48,5 +48,6 @@ public class AnimalRestController {
     public void delete(@PathVariable Long id) {
         animalService.delete(id);
     }
+
 
 }

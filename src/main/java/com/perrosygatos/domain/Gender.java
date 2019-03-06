@@ -1,6 +1,5 @@
 package com.perrosygatos.domain;
 
-
 import lombok.Data;
 
 import javax.persistence.Entity;
@@ -10,13 +9,11 @@ import javax.persistence.Id;
 
 @Entity
 @Data
-public class User {
+public class Gender {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String email;
-    private String password;
-    private String userName;
+    private String name;
 
 }

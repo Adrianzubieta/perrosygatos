@@ -8,6 +8,58 @@
         "changes": [
           {
             "createTable": {
+              "tableName": "gender",
+              "columns": [
+                {
+                  "column": {
+                    "name": "id",
+                    "type": "bigint",
+                    "autoIncrement": true,
+                    "constraints": {
+                      "primaryKey": true
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "name",
+                    "type": "varchar(100)",
+                    "constraints": {
+                      "nullable": false
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "createTable": {
+              "tableName": "size",
+              "columns": [
+                {
+                  "column": {
+                    "name": "id",
+                    "type": "bigint",
+                    "autoIncrement": true,
+                    "constraints": {
+                      "primaryKey": true
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "name",
+                    "type": "varchar(100)",
+                    "constraints": {
+                      "nullable": false
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "createTable": {
               "tableName": "country",
               "columns": [
                 {
@@ -247,6 +299,36 @@
                       "nullable": true,
                       "foreignKeyName": "fk_animal_refuge",
                       "references": "refuge(id)"
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "city_id",
+                    "type": "bigint",
+                    "constraints": {
+                      "foreignKeyName": "fk_animal_city",
+                      "references": "city(id)"
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "gender_id",
+                    "type": "bigint",
+                    "constraints": {
+                      "foreignKeyName": "fk_animal_gender",
+                      "references": "gender(id)"
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "size_id",
+                    "type": "bigint",
+                    "constraints": {
+                      "foreignKeyName": "fk_size_city",
+                      "references": "size(id)"
                     }
                   }
                 }

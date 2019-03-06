@@ -18,4 +18,10 @@ public class Animal {
     private String history;
     @ManyToOne
     private Kind kind;
+    @ManyToOne
+    private City city;
+    @ManyToOne
+    private Gender gender;
+    @ManyToOne
+    private Size size;
 }

@@ -18,48 +18,48 @@ import java.util.NoSuchElementException;
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
-  private final UserRepository userRepository;
-  private final ModelMapper modelMapper;
+    private final UserRepository userRepository;
+    private final ModelMapper modelMapper;
 
-  @Override
-  public User findById(Long id) {
-    Assert.notNull(id, "El Id no puede ser null");
-    return userRepository.findById(id).get();
-  }
-
-  @Override
-  public Page<User> findAll(Pageable pageable) {
-    Assert.notNull(pageable, "El paginado no puede ser vacio");
-    return userRepository.findAll(pageable);
-  }
-
-  @Override
-  @Transactional
-  public User save(User user) {
-    Assert.notNull(user, "El usuario no puede ser vacio");
-    Assert.notNull(user.getEmail(), "El email no puede ser vacio");
-    Assert.notNull(user.getPassword(), "El password no puede ser vacio");
-    return userRepository.save(user);
-  }
-
-  @Override
-  @Transactional
-  public User update(User user) {
-    Assert.notNull(user, "El usuario no puede ser vacio");
-    Assert.hasText(user.getUserName(), "El userName no puede ser vacio");
-    User userToUpdate = findById(user.getId());
-    modelMapper.map(user, userToUpdate);
-    return userToUpdate;
-  }
-
-  @Override
-  public void delete(Long id) {
-    Assert.notNull(id,"El id no puede ser vacio");
-    try {
-      userRepository.deleteById(id);
-    }catch (EmptyResultDataAccessException ex){
-      throw new NoSuchElementException();
+    @Override
+    public User findById(Long id) {
+        Assert.notNull(id, "El Id no puede ser null");
+        return userRepository.findById(id).get();
     }
 
-  }
+    @Override
+    public Page<User> findAll(Pageable pageable) {
+        Assert.notNull(pageable, "El paginado no puede ser vacio");
+        return userRepository.findAll(pageable);
+    }
+
+    @Override
+    @Transactional
+    public User save(User user) {
+        Assert.notNull(user, "El usuario no puede ser vacio");
+        Assert.notNull(user.getEmail(), "El email no puede ser vacio");
+        Assert.notNull(user.getPassword(), "El password no puede ser vacio");
+        return userRepository.save(user);
+    }
+
+    @Override
+    @Transactional
+    public User update(User user) {
+        Assert.notNull(user, "El usuario no puede ser vacio");
+        Assert.hasText(user.getUserName(), "El userName no puede ser vacio");
+        User userToUpdate = findById(user.getId());
+        modelMapper.map(user, userToUpdate);
+        return userToUpdate;
+    }
+
+    @Override
+    public void delete(Long id) {
+        Assert.notNull(id, "El id no puede ser vacio");
+        try {
+            userRepository.deleteById(id);
+        } catch (EmptyResultDataAccessException ex) {
+            throw new NoSuchElementException();
+        }
+
+    }
 }

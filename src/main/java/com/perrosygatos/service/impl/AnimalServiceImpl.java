@@ -4,6 +4,7 @@ import com.perrosygatos.domain.Animal;
 import com.perrosygatos.repository.AnimalRepository;
 import com.perrosygatos.service.AnimalService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
@@ -12,10 +13,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
+import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class AnimalServiceImpl implements AnimalService {
 
     private final AnimalRepository animalRepository;
@@ -57,5 +61,28 @@ public class AnimalServiceImpl implements AnimalService {
         } catch (EmptyResultDataAccessException ex) {
             throw new NoSuchElementException();
         }
+    }
+
+    @Override
+    public List<Animal> filterByCity(Long cityId) {
+        List<Animal> animals = animalRepository.findAllByCity_Id(cityId);
+        log.debug("Response [filterByCity]: {}", animals);
+        return animals;
+    }
+
+    @Override
+    public List<Animal> filterByCityAndKind(Long cityId, Long kindId) {
+        List<Animal> animals = filterByCity(cityId).stream()
+                .filter(animal -> animal.getKind().getId().equals(kindId)).collect(Collectors.toList());
+        log.debug("Response [filterByCityAndKind]: {}", animals);
+        return animals;
+    }
+
+    @Override
+    public List<Animal> filterByCityAndKindAndSize(Long cityId, Long kindId, Long sizeId) {
+        List<Animal> animals = filterByCityAndKind(cityId, kindId).stream()
+                .filter(animal -> animal.getSize().getId().equals(sizeId)).collect(Collectors.toList());
+        log.debug("Response [filterByCityAndKindAndSize]: {}", animals);
+        return animals;
     }
 }

@@ -15,40 +15,40 @@ import org.springframework.web.bind.annotation.*;
 @Slf4j
 public class UserRestController {
 
-  private final UserService userService;
+    private final UserService userService;
 
-  @GetMapping("/{id}")
-  public User findById(@PathVariable Long id){
-    log.debug("Buscando user por Id: {}",id);
-    User user = userService.findById(id);
-    log.debug("Devuelvo user: {}",user);
-    return user;
-  }
+    @GetMapping("/{id}")
+    public User findById(@PathVariable Long id) {
+        log.debug("Buscando user por Id: {}", id);
+        User user = userService.findById(id);
+        log.debug("Devuelvo user: {}", user);
+        return user;
+    }
 
-  @GetMapping
-  public Page<User> findAll(Pageable pageable){
-    Page<User> users = userService.findAll(pageable);
-    log.debug("devuelvo users: {}", users);
-    return users;
-  }
+    @GetMapping
+    public Page<User> findAll(Pageable pageable) {
+        Page<User> users = userService.findAll(pageable);
+        log.debug("devuelvo users: {}", users);
+        return users;
+    }
 
-  @PostMapping
-  @ResponseStatus(HttpStatus.CREATED)
-  public User save(@RequestBody User user){
-    User userSaved = userService.save(user);
-    log.debug("Se guardo user: {}",user);
-    return userSaved;
-  }
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public User save(@RequestBody User user) {
+        User userSaved = userService.save(user);
+        log.debug("Se guardo user: {}", user);
+        return userSaved;
+    }
 
-  @DeleteMapping("/{id}")
-  @ResponseStatus(HttpStatus.NO_CONTENT)
-  public void delete(@PathVariable Long id){
-    userService.delete(id);
-  }
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable Long id) {
+        userService.delete(id);
+    }
 
-  @PatchMapping
-  public User update(@RequestBody User user){
-    return userService.update(user);
-  }
+    @PatchMapping
+    public User update(@RequestBody User user) {
+        return userService.update(user);
+    }
 
 }

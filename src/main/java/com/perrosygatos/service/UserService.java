@@ -6,13 +6,13 @@ import org.springframework.data.domain.Pageable;
 
 public interface UserService {
 
-  User findById(Long id);
+    User findById(Long id);
 
-  Page<User> findAll(Pageable pageable);
+    Page<User> findAll(Pageable pageable);
 
-  User save(User user);
+    User save(User user);
 
-  User update(User user);
+    User update(User user);
 
-  void delete(Long id);
+    void delete(Long id);
 }

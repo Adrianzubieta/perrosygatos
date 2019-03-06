@@ -6,7 +6,6 @@ DELETE FROM refuge;
 DELETE FROM kind;
 DELETE FROM animal;
 
-
 INSERT INTO country
   (id, name)
 VALUES
@@ -24,6 +23,19 @@ INSERT INTO city
 VALUES
   (1, 'CABA', 1),
   (2, 'Tandil', 1);
+
+INSERT INTO size
+  (id, name)
+VALUES
+  (1, 'Pequeño'),
+  (2, 'Mediano'),
+  (3, 'Grande');
+
+INSERT INTO gender
+  (id, name)
+VALUES
+  (1, 'Macho'),
+  (2, 'Hembra');
 
 INSERT INTO user
 (id, user_name, email, password)
@@ -46,9 +58,9 @@ VALUES
   (2, 'Gato');
 
 INSERT INTO animal
-(id, name, kind_id, age, description, refuge_id, url_photo, history)
+(id, name, kind_id, age, description, refuge_id, url_photo, history, city_id, size_id, gender_id)
 VALUES
-  (1, 'firulais', 1, 2, 'description_1', 1, 'www.imageFirulais.com', 'history_1'),
-  (2, 'tom', 2, 2, 'description_2', 1, 'www.imageTom.com', 'history_2');
+  (1, 'firulais', 1, 2, 'description_1', 1, 'www.imageFirulais.com', 'history_1', 1, 1, 2),
+  (2, 'tom', 2, 2, 'description_2', 1, 'www.imageTom.com', 'history_2', 2, 2, 1);
 
 
