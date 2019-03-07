@@ -61,6 +61,9 @@ INSERT INTO animal
 (id, name, kind_id, age, description, refuge_id, url_photo, history, city_id, size_id, gender_id)
 VALUES
   (1, 'firulais', 1, 2, 'description_1', 1, 'www.imageFirulais.com', 'history_1', 1, 1, 2),
-  (2, 'tom', 2, 2, 'description_2', 1, 'www.imageTom.com', 'history_2', 2, 2, 1);
+  (2, 'jeik', 1, 2, 'description_1', 1, 'www.imageFirulais.com', 'history_1', 1, 2, 2),
+  (3, 'tom', 2, 2, 'description_2', 1, 'www.imageTom.com', 'history_2', 1, 2, 1),
+  (4, 'kin', 2, 2, 'description_2', 1, 'www.imageTom.com', 'history_2', 2, 2, 1);
+
 
 
