@@ -3,10 +3,7 @@ package com.perrosygatos.controller;
 import com.perrosygatos.domain.City;
 import com.perrosygatos.service.CityService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -18,6 +15,7 @@ public class CityRestController {
     private final CityService cityService;
 
     @GetMapping("/{stateId}/cities")
+    @CrossOrigin(origins = "*", methods = {RequestMethod.GET})
     public List<City> findByStateId(@PathVariable Long stateId) {
         return cityService.findByStateId(stateId);
     }

@@ -1,10 +1,9 @@
 package com.perrosygatos.service;
 
 import com.perrosygatos.domain.Animal;
+import com.querydsl.core.types.Predicate;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-
-import java.util.List;
 
 public interface AnimalService {
 
@@ -18,9 +17,11 @@ public interface AnimalService {
 
     void delete(Long id);
 
-    List<Animal> filterByCity(Long cityId);
+    Page<Animal> filter(Predicate predicate, Pageable pageable);
 
-    List<Animal> filterByCityAndKind(Long cityId, Long kindId);
-
-    List<Animal> filterByCityAndKindAndSize(Long cityId, Long kindId, Long sizeId);
+//    List<Animal> filterByCity(Long cityId);
+//
+//    List<Animal> filterByCityAndKind(Long cityId, Long kindId);
+//
+//    List<Animal> filterByCityAndKindAndSize(Long cityId, Long kindId, Long sizeId);
 }
