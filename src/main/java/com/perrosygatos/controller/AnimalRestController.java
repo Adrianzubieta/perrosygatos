@@ -40,10 +40,6 @@ public class AnimalRestController {
         return animalService.update(animal);
     }
 
-//    @GetMapping
-//    public Page<Animal> findAll(@RequestBody Pageable pageable) {
-//        return animalService.findAll(pageable);
-//    }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
@@ -52,7 +48,8 @@ public class AnimalRestController {
     }
 
     @GetMapping
-    Page<Animal> filter(@QuerydslPredicate(root = Animal.class) Predicate predicate, Pageable pageable) {
+    @CrossOrigin(origins = "*", methods = {RequestMethod.GET})
+    Page<Animal> findAll(@QuerydslPredicate(root = Animal.class) Predicate predicate, Pageable pageable) {
         return animalService.filter(predicate, pageable);
     }
 
