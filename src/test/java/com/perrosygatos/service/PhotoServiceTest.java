@@ -7,11 +7,14 @@ import com.perrosygatos.domain.Animal;
 import com.perrosygatos.domain.Photo;
 import lombok.SneakyThrows;
 import org.junit.Test;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Captor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.jdbc.JdbcTestUtils;
 
 import java.io.ByteArrayInputStream;
+import java.util.Base64;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
@@ -25,6 +28,9 @@ public class PhotoServiceTest extends BaseTest {
     @MockBean
     private AmazonS3Client amazonS3ClientMock;
 
+    @Captor
+    private ArgumentCaptor<String> argumentCaptorString;
+
     @Autowired
     private PhotoService photoService;
 
@@ -34,27 +40,91 @@ public class PhotoServiceTest extends BaseTest {
         String imageOne = getContentFromFile("test-files/imagesInBase64/imageOne.txt");
 
         given(amazonS3ClientMock
-                .putObject(eq("perrosygatos-test"), "1.jpeg", any(ByteArrayInputStream.class), any()))
+                .putObject(eq("perrosygatos-test"), argumentCaptorString.capture(), any(ByteArrayInputStream.class), any()))
                 .willReturn(new PutObjectResult());
-
-        Animal animal = new Animal();
-        animal.setId(1L);
 
         Photo photo = new Photo();
         photo.setName("firulais en la cama");
-        photo.setAnimal(animal);
+        photo.setAnimalId(1L);
+        photo.setContentBase64(imageOne);
 
         Photo photoSaved = photoService.save(photo);
 
         assertThat(photoSaved.getAnimal().getId()).isEqualTo(1L);
-        assertThat(photoSaved.getPath()).isEqualTo("");
-        assertThat(photoSaved.getId()).isEqualTo(2L);
-        assertThat(photoSaved.getName()).isEqualTo("firulas en cama");
+        assertThat(photoSaved.getPath()).isEqualTo(argumentCaptorString.getValue());
+        assertThat(photoSaved.getName()).isEqualTo("firulais en la cama");
 
         then(amazonS3ClientMock).should(times(1))
-                .putObject(eq("perrosygatos-test"), "1.jpeg", any(ByteArrayInputStream.class), any());
+                .putObject(eq("perrosygatos-test"), eq(argumentCaptorString.getValue()), any(ByteArrayInputStream.class), any());
 
-
-        assertThat(JdbcTestUtils.countRowsInTable(jdbcTemplate, "photoSaved")).isEqualTo(1);
+        assertThat(JdbcTestUtils.countRowsInTable(jdbcTemplate, "photo")).isEqualTo(2);
     }
+
+    @Test(expected = IllegalArgumentException.class)
+    @SneakyThrows
+    public void save_withContentBase64Invalid_throwIllegalArgumentException() {
+        String imageOne = Base64.getEncoder().encodeToString("photo".getBytes());
+
+        given(amazonS3ClientMock
+                .putObject(eq("perrosygatos-test"), eq("/2.jpeg"), any(ByteArrayInputStream.class), any()))
+                .willReturn(new PutObjectResult());
+
+        Photo photo = new Photo();
+        photo.setName("firulais en la cama");
+        photo.setAnimalId(1L);
+        photo.setContentBase64(imageOne);
+
+        photoService.save(photo);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    @SneakyThrows
+    public void save_withNullContentBase64_throwIllegalArgumentException() {
+        given(amazonS3ClientMock
+                .putObject(eq("perrosygatos-test"), eq("/2.jpeg"), any(ByteArrayInputStream.class), any()))
+                .willReturn(new PutObjectResult());
+
+        Photo photo = new Photo();
+        photo.setName("firulais en la cama");
+        photo.setAnimalId(1L);
+
+        photoService.save(photo);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    @SneakyThrows
+    public void save_withAnimalNull_throwIllegalArgumentException() {
+        String imageOne = getContentFromFile("test-files/imagesInBase64/imageOne.txt");
+
+        given(amazonS3ClientMock
+                .putObject(eq("perrosygatos-test"), eq("/2.jpeg"), any(ByteArrayInputStream.class), any()))
+                .willReturn(new PutObjectResult());
+
+        Photo photo = new Photo();
+        photo.setName("firulais en la cama");
+        photo.setContentBase64(imageOne);
+
+        photoService.save(photo);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    @SneakyThrows
+    public void save_withAnimalIdNull_throwIllegalArgumentException() {
+        String imageOne = getContentFromFile("test-files/imagesInBase64/imageOne.txt");
+
+        given(amazonS3ClientMock
+                .putObject(eq("perrosygatos-test"), eq("/2.jpeg"), any(ByteArrayInputStream.class), any()))
+                .willReturn(new PutObjectResult());
+
+        Animal animal = new Animal();
+
+        Photo photo = new Photo();
+        photo.setName("firulais en la cama");
+        photo.setAnimal(animal);
+        photo.setContentBase64(imageOne);
+
+        photoService.save(photo);
+    }
+
+
 }

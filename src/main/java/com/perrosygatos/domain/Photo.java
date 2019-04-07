@@ -1,14 +1,14 @@
 package com.perrosygatos.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 @Data
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Photo {
 
     @Id
@@ -16,5 +16,14 @@ public class Photo {
     private Long id;
     private String name;
     private String path;
+    @ManyToOne
+    @JsonIgnore
     private Animal animal;
+    @Transient
+    private String contentBase64;
+    @Transient
+    private Long animalId;
+    @Transient
+    private String url;
+
 }

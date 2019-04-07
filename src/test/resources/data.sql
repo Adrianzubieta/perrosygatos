@@ -2,6 +2,7 @@ DELETE FROM city;
 DELETE FROM state;
 DELETE FROM country;
 DELETE FROM user;
+DELETE FROM photo;
 DELETE FROM refuge;
 DELETE FROM kind;
 DELETE FROM animal;
@@ -64,6 +65,11 @@ VALUES
   (2, 'jeik', 1, 2, 'description_1', 1, 'www.imageFirulais.com', 'history_1', 1, 2, 2),
   (3, 'tom', 2, 2, 'description_2', 1, 'www.imageTom.com', 'history_2', 1, 2, 1),
   (4, 'kin', 2, 2, 'description_2', 1, 'www.imageTom.com', 'history_2', 2, 2, 1);
+
+INSERT INTO photo
+(id, name, path, animal_id)
+VALUES
+  (1, 'kin en Los juegos', '/1.jpeg', 1);
 
 
 

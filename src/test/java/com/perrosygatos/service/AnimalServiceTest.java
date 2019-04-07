@@ -26,6 +26,8 @@ public class AnimalServiceTest extends BaseTest {
         Animal animal = animalService.findById(id);
 
         assertThat(animal.getId()).isEqualTo(1L);
+        assertThat(animal.getPhotos().size()).isEqualTo(1);
+        assertThat(animal.getPhotos().get(0).getPath()).isEqualTo("/1.jpeg");
         assertThat(animal.getName()).isEqualTo("firulais");
         assertThat(animal.getKind().getName()).isEqualTo("Perro");
     }

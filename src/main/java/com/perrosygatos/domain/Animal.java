@@ -1,11 +1,15 @@
 package com.perrosygatos.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @Entity
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Animal {
 
     @Id
@@ -24,4 +28,10 @@ public class Animal {
     private Gender gender;
     @ManyToOne
     private Size size;
+    @ManyToOne
+    @JsonIgnore
+    private Refuge refuge;
+    @OneToMany
+    @JoinColumn(name = "animal_id")
+    private List<Photo> photos;
 }

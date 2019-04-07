@@ -21,18 +21,13 @@ public class AnimalRestController {
 
     @GetMapping("/{id}")
     public Animal findById(@PathVariable Long id) {
-        log.debug("Buscando Animal por Id: {}", id);
-        Animal animal = animalService.findById(id);
-        log.debug("Devuelvo Animal: {}", animal);
-        return animal;
+        return animalService.findById(id);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Animal save(@RequestBody Animal animal) {
-        Animal animalSaved = animalService.save(animal);
-        log.debug("Se guardo Animal: {}", animal);
-        return animalSaved;
+        return animalService.save(animal);
     }
 
     @PatchMapping

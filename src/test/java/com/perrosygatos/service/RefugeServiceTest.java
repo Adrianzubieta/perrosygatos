@@ -26,7 +26,7 @@ public class RefugeServiceTest extends BaseTest {
 
         assertThat(refuge.getId()).isEqualTo(1L);
         assertThat(refuge.getName()).isEqualTo("refugio_1");
-        assertThat(refuge.getAnimals().size()).isEqualTo(2);
+        assertThat(refuge.getAnimals().size()).isEqualTo(4);
         assertThat(refuge.getAnimals().get(0).getName()).isEqualTo("firulais");
     }
 
