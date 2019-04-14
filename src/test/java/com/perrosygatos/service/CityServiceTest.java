@@ -11,7 +11,6 @@ import java.util.List;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
-@Transactional
 public class CityServiceTest extends BaseTest {
 
     @Autowired

@@ -1,11 +1,13 @@
+DELETE FROM user;
+DELETE FROM photo;
+DELETE FROM animal;
+DELETE FROM refuge;
+DELETE FROM kind;
 DELETE FROM city;
 DELETE FROM state;
 DELETE FROM country;
-DELETE FROM user;
-DELETE FROM photo;
-DELETE FROM refuge;
-DELETE FROM kind;
-DELETE FROM animal;
+DELETE FROM size;
+DELETE FROM gender;
 
 INSERT INTO country
   (id, name)
@@ -59,12 +61,12 @@ VALUES
   (2, 'Gato');
 
 INSERT INTO animal
-(id, name, kind_id, age, description, refuge_id, url_photo, history, city_id, size_id, gender_id)
+(id, name, kind_id, age, description, refuge_id ,url_photo, history, city_id, size_id, gender_id)
 VALUES
-  (1, 'firulais', 1, 2, 'description_1', 1, 'www.imageFirulais.com', 'history_1', 1, 1, 2),
-  (2, 'jeik', 1, 2, 'description_1', 1, 'www.imageFirulais.com', 'history_1', 1, 2, 2),
-  (3, 'tom', 2, 2, 'description_2', 1, 'www.imageTom.com', 'history_2', 1, 2, 1),
-  (4, 'kin', 2, 2, 'description_2', 1, 'www.imageTom.com', 'history_2', 2, 2, 1);
+  (1, 'firulais', 1, 2, 'description_1', 1,'www.imageFirulais.com', 'history_1', 1, 1, 2),
+  (2, 'jeik', 1, 2, 'description_1', 1,'www.imageFirulais.com', 'history_1', 1, 2, 2),
+  (3, 'tom', 2, 2, 'description_2', 1,'www.imageTom.com', 'history_2', 1, 2, 1),
+  (4, 'kin', 2, 2, 'description_2', 1,'www.imageTom.com', 'history_2', 2, 2, 1);
 
 INSERT INTO photo
 (id, name, path, animal_id)

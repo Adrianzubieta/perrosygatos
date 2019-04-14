@@ -5,7 +5,9 @@ import com.amazonaws.services.s3.model.PutObjectResult;
 import com.perrosygatos.BaseTest;
 import com.perrosygatos.domain.Animal;
 import com.perrosygatos.domain.Photo;
+import com.perrosygatos.vo.RequestPhotoVo;
 import lombok.SneakyThrows;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
@@ -43,12 +45,12 @@ public class PhotoServiceTest extends BaseTest {
                 .putObject(eq("perrosygatos-test"), argumentCaptorString.capture(), any(ByteArrayInputStream.class), any()))
                 .willReturn(new PutObjectResult());
 
-        Photo photo = new Photo();
-        photo.setName("firulais en la cama");
-        photo.setAnimalId(1L);
-        photo.setContentBase64(imageOne);
+        RequestPhotoVo requestPhotoVo = new RequestPhotoVo();
+        requestPhotoVo.setName("firulais en la cama");
+        requestPhotoVo.setContentBase64(imageOne);
+        requestPhotoVo.setAnimalId(1L);
 
-        Photo photoSaved = photoService.save(photo);
+        Photo photoSaved = photoService.save(requestPhotoVo);
 
         assertThat(photoSaved.getAnimal().getId()).isEqualTo(1L);
         assertThat(photoSaved.getPath()).isEqualTo(argumentCaptorString.getValue());
@@ -69,12 +71,12 @@ public class PhotoServiceTest extends BaseTest {
                 .putObject(eq("perrosygatos-test"), eq("/2.jpeg"), any(ByteArrayInputStream.class), any()))
                 .willReturn(new PutObjectResult());
 
-        Photo photo = new Photo();
-        photo.setName("firulais en la cama");
-        photo.setAnimalId(1L);
-        photo.setContentBase64(imageOne);
+        RequestPhotoVo requestPhotoVo = new RequestPhotoVo();
+        requestPhotoVo.setName("firulais en la cama");
+        requestPhotoVo.setContentBase64(imageOne);
+        requestPhotoVo.setAnimalId(1L);
 
-        photoService.save(photo);
+        photoService.save(requestPhotoVo);
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -84,11 +86,12 @@ public class PhotoServiceTest extends BaseTest {
                 .putObject(eq("perrosygatos-test"), eq("/2.jpeg"), any(ByteArrayInputStream.class), any()))
                 .willReturn(new PutObjectResult());
 
-        Photo photo = new Photo();
-        photo.setName("firulais en la cama");
-        photo.setAnimalId(1L);
+        RequestPhotoVo requestPhotoVo = new RequestPhotoVo();
+        requestPhotoVo.setName("firulais en la cama");
+        requestPhotoVo.setAnimalId(1L);
 
-        photoService.save(photo);
+
+        photoService.save(requestPhotoVo);
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -100,11 +103,11 @@ public class PhotoServiceTest extends BaseTest {
                 .putObject(eq("perrosygatos-test"), eq("/2.jpeg"), any(ByteArrayInputStream.class), any()))
                 .willReturn(new PutObjectResult());
 
-        Photo photo = new Photo();
-        photo.setName("firulais en la cama");
-        photo.setContentBase64(imageOne);
+        RequestPhotoVo requestPhotoVo = new RequestPhotoVo();
+        requestPhotoVo.setName("firulais en la cama");
+        requestPhotoVo.setContentBase64(imageOne);
 
-        photoService.save(photo);
+        photoService.save(requestPhotoVo);
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -116,15 +119,11 @@ public class PhotoServiceTest extends BaseTest {
                 .putObject(eq("perrosygatos-test"), eq("/2.jpeg"), any(ByteArrayInputStream.class), any()))
                 .willReturn(new PutObjectResult());
 
-        Animal animal = new Animal();
+        RequestPhotoVo requestPhotoVo = new RequestPhotoVo();
+        requestPhotoVo.setName("firulais en la cama");
+        requestPhotoVo.setContentBase64(imageOne);
 
-        Photo photo = new Photo();
-        photo.setName("firulais en la cama");
-        photo.setAnimal(animal);
-        photo.setContentBase64(imageOne);
-
-        photoService.save(photo);
+        photoService.save(requestPhotoVo);
     }
-
 
 }

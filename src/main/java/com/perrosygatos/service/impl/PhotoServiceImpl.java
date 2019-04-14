@@ -6,6 +6,7 @@ import com.perrosygatos.repository.PhotoAmazonRepository;
 import com.perrosygatos.repository.PhotoRepository;
 import com.perrosygatos.service.AnimalService;
 import com.perrosygatos.service.PhotoService;
+import com.perrosygatos.vo.RequestPhotoVo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,18 +28,19 @@ public class PhotoServiceImpl implements PhotoService {
 
     @Override
     @Transactional
-    public Photo save(Photo photo) throws IOException {
-        Assert.notNull(photo.getContentBase64(), "El contenido de la foto no puede estar vacio");
-        Assert.notNull(photo.getAnimalId(), "El id del animal no puede estar vacio");
-        Animal animal = animalService.findById(photo.getAnimalId());
-        photo.setAnimal(animal);
-        Photo photoSaved = photoRepository.save(photo);
-        saveInAmazonS3(photoSaved);
-        return photo;
+    public Photo save(RequestPhotoVo requestPhotoVo) throws IOException {
+        Assert.notNull(requestPhotoVo.getContentBase64(), "El contenido de la foto no puede estar vacio");
+        Assert.notNull(requestPhotoVo.getAnimalId(), "El id del animal no puede estar vacio");
+        Animal animal = animalService.findById(requestPhotoVo.getAnimalId());
+        Photo photoSaved = photoRepository.save(getPhoto());
+        photoSaved.setAnimal(animal);
+        photoSaved.setName(requestPhotoVo.getName());
+        saveInAmazonS3(photoSaved, requestPhotoVo.getContentBase64());
+        return photoSaved;
     }
 
-    private void saveInAmazonS3(Photo photo) throws IOException {
-        InputStream byteArrayPhoto = new ByteArrayInputStream(Base64.getDecoder().decode(photo.getContentBase64()));
+    private void saveInAmazonS3(Photo photo, String contentBase64) throws IOException {
+        InputStream byteArrayPhoto = new ByteArrayInputStream(Base64.getDecoder().decode(contentBase64));
         photo.setPath(getFilePosition(photo.getId().toString(), byteArrayPhoto));
         photoAmazonRepository.saveInS3(photo.getPath(), byteArrayPhoto);
     }
@@ -56,4 +58,7 @@ public class PhotoServiceImpl implements PhotoService {
         }
     }
 
+    private Photo getPhoto(){
+        return new Photo();
+    }
 }

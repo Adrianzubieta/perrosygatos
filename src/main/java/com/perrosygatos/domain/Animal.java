@@ -31,7 +31,7 @@ public class Animal {
     @ManyToOne
     @JsonIgnore
     private Refuge refuge;
-    @OneToMany
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
     @JoinColumn(name = "animal_id")
     private List<Photo> photos;
 }

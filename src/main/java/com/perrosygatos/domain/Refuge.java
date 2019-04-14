@@ -19,7 +19,7 @@ public class Refuge {
     private String description;
     private String phone;
     private String address;
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
     @JoinColumn(name = "refuge_id")
     List<Animal> animals;
     @ManyToOne

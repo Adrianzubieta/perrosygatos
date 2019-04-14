@@ -20,10 +20,6 @@ public class Photo {
     @JsonIgnore
     private Animal animal;
     @Transient
-    private String contentBase64;
-    @Transient
-    private Long animalId;
-    @Transient
     private String url;
 
 }

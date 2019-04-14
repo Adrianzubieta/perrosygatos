@@ -31,7 +31,6 @@ public class KindServiceImpl implements KindService {
     }
 
     @Override
-    @Transactional
     public Kind save(Kind kindToSave) {
         Assert.notNull(kindToSave, "The kind is null");
         Assert.hasText(kindToSave.getName(), "The name of kind is null");

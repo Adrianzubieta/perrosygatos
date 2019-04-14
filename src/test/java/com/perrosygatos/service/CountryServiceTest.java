@@ -10,7 +10,6 @@ import java.util.List;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
-@Transactional
 public class CountryServiceTest extends BaseTest {
 
     @Autowired
