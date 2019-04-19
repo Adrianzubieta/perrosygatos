@@ -6,6 +6,4 @@ import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 
 public interface AnimalRepository extends JpaRepository<Animal, Long>, QuerydslPredicateExecutor<Animal> {
 
-//    List<Animal> findAllByCity_Id(Long cityId);
-
 }

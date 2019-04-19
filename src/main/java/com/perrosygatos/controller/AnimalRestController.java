@@ -45,7 +45,8 @@ public class AnimalRestController {
     @GetMapping
     @CrossOrigin(origins = "*", methods = {RequestMethod.GET})
     Page<Animal> findAll(@QuerydslPredicate(root = Animal.class) Predicate predicate, Pageable pageable) {
-        return animalService.filter(predicate, pageable);
+        log.debug("predicate {}", predicate);
+        return animalService.findAll(predicate, pageable);
     }
 
 

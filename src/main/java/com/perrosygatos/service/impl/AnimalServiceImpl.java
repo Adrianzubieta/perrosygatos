@@ -4,6 +4,7 @@ import com.perrosygatos.domain.Animal;
 import com.perrosygatos.repository.AnimalRepository;
 import com.perrosygatos.service.AnimalService;
 import com.querydsl.core.types.Predicate;
+import com.querydsl.core.types.dsl.DslExpression;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
@@ -47,12 +48,6 @@ public class AnimalServiceImpl implements AnimalService {
     }
 
     @Override
-    public Page<Animal> findAll(Pageable pageable) {
-        Assert.notNull(pageable, "The pageable is null");
-        return animalRepository.findAll(pageable);
-    }
-
-    @Override
     public void delete(Long id) {
         Assert.notNull(id, "El id no puede ser vacio");
         try {
@@ -63,30 +58,9 @@ public class AnimalServiceImpl implements AnimalService {
     }
 
     @Override
-    public Page<Animal> filter(Predicate predicate, Pageable pageable) {
+    public Page<Animal> findAll(Predicate predicate, Pageable pageable) {
+        log.debug("predicate service {}",predicate);
         return animalRepository.findAll(predicate, pageable);
     }
-//
-//    @Override
-//    public List<Animal> filterByCity(Long cityId) {
-//        List<Animal> animals = animalRepository.findAllByCity_Id(cityId);
-//        log.debug("Response [filterByCity]: {}", animals);
-//        return animals;
-//    }
-//
-//    @Override
-//    public List<Animal> filterByCityAndKind(Long cityId, Long kindId) {
-//        List<Animal> animals = filterByCity(cityId).stream()
-//                .filter(animal -> animal.getKind().getId().equals(kindId)).collect(Collectors.toList());
-//        log.debug("Response [filterByCityAndKind]: {}", animals);
-//        return animals;
-//    }
-//
-//    @Override
-//    public List<Animal> filterByCityAndKindAndSize(Long cityId, Long kindId, Long sizeId) {
-//        List<Animal> animals = filterByCityAndKind(cityId, kindId).stream()
-//                .filter(animal -> animal.getSize().getId().equals(sizeId)).collect(Collectors.toList());
-//        log.debug("Response [filterByCityAndKindAndSize]: {}", animals);
-//        return animals;
-//    }
+
 }

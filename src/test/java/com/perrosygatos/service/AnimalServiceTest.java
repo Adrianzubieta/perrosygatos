@@ -5,9 +5,6 @@ import com.perrosygatos.domain.Animal;
 import com.perrosygatos.domain.Kind;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.test.jdbc.JdbcTestUtils;
 
 import java.util.NoSuchElementException;
@@ -110,29 +107,6 @@ public class AnimalServiceTest extends BaseTest {
     }
 
     @Test
-    public void findAll_withPageZeroSizeTwo_returnPageOfAnimals() {
-        Pageable pageable = PageRequest.of(0, 2);
-
-        Page<Animal> animals = animalService.findAll(pageable);
-
-        assertThat(animals.getTotalPages()).isEqualTo(2);
-        assertThat(animals.getContent().size()).isEqualTo(2);
-        assertThat(animals.getContent().get(0).getName()).isEqualTo("firulais");
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void findAll_withNull_throwIllegalArgumentException() {
-        animalService.findAll(null);
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void findAll_withPageZeroSizeZero_throwIllegalArgumentException() {
-        Pageable pageable = PageRequest.of(0, 0);
-
-        animalService.findAll(pageable);
-    }
-
-    @Test
     public void delete_withExistingId_deleteAnimal() {
         Long id = 1L;
 
@@ -153,50 +127,5 @@ public class AnimalServiceTest extends BaseTest {
     public void delete_withNull_throwNoSuchElementException() {
         animalService.delete(null);
     }
-
-//    @Test
-//    public void filterByCity_withCityExisting_returnListOfAnimals() {
-//        List<Animal> animals = animalService.filterByCity(1L);
-//
-//        assertThat(animals.size()).isEqualTo(3);
-//        assertThat(animals.get(0).getName()).isEqualTo("firulais");
-//    }
-//
-//    @Test
-//    public void filterByKind_withCityNonExisting_returnListOfAnimalsEmpty() {
-//        List<Animal> animals = animalService.filterByCity(99L);
-//
-//        assertThat(animals).isEmpty();
-//    }
-//
-//    @Test
-//    public void filterByCityAndKind_withCityAndKindExisting_returnListOfAnimals() {
-//        List<Animal> animals = animalService.filterByCityAndKind(1L, 1L);
-//
-//        assertThat(animals.size()).isEqualTo(2);
-//        assertThat(animals.get(0).getName()).isEqualTo("firulais");
-//    }
-//
-//    @Test
-//    public void filterByCityAndKind_withCityExistingAndKindNonExisting_returnListOfAnimals() {
-//        List<Animal> animals = animalService.filterByCityAndKind(1L, 99L);
-//
-//        assertThat(animals).isEmpty();
-//    }
-//
-//    @Test
-//    public void filterByCityAndKindAndSize_withCityAndKindAndSizeExisting_returnListOfAnimals() {
-//        List<Animal> animals = animalService.filterByCityAndKindAndSize(2L, 2L, 2L);
-//
-//        assertThat(animals.size()).isEqualTo(1);
-//        assertThat(animals.get(0).getName()).isEqualTo("kin");
-//    }
-//
-//    @Test
-//    public void filterByCityAndKindAndSize_withCityAndKindAndSizeExisting_returnListOfAnimalsEmpty() {
-//        List<Animal> animals = animalService.filterByCityAndKindAndSize(1L, 2L, 99L);
-//
-//        assertThat(animals).isEmpty();
-//    }
 
 }
